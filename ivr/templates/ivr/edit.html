@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block content_header %}
-  {{ build_breadcrumb('Ivr', '', 'server', ['List']) }}
+  {{ build_breadcrumb('Ivr', '', 'navicon', ['List']) }}
 {% endblock %}
 
 {% block content %}
-  {% call build_form_containers('Ivr' ~ ' ' ~ resources.ivr.name, 'server') %}
+  {% call build_form_containers('Ivr' ~ ' ' ~ resources.ivr.name, 'navicon') %}
     {% call build_form(action=url_for('.IvrView:put', id=resources.ivr.id)) %}
       {% call add_default_fields(form=form, submit_value="Update") %}
         {{ render_field(form.name) }}

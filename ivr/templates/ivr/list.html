@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 
 {% block content_header %}
-  {{ build_breadcrumb('Ivr', '', 'server', ['List']) }}
+  {{ build_breadcrumb('Ivr', '', 'navicon', ['List']) }}
 {% endblock %}
 
 {% block content %}
   <section class="content">
-    {% call build_list_containers('Ivr', 'server') %}
+    {% call build_list_containers('Ivr', 'navicon') %}
       {% call build_list_table() %}
         {% call build_list_table_headers() %}
           <th>Name</th>

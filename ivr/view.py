@@ -31,6 +31,6 @@ class IvrView(BaseView):
     resource = 'ivr'
     schema = AggregatorSchema
 
-    @classy_menu_item('.ivr', 'Ivr', order=4, icon="server")
+    @classy_menu_item('.ivr', 'Ivr', order=4, icon="navicon")
     def index(self):
         return super(IvrView, self).index()
