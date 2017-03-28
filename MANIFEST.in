@@ -1,0 +1,2 @@
+recursive-include ivr/templates *
+recursive-include ivr/static *
