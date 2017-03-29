@@ -4,25 +4,28 @@
 
 from flask_wtf import FlaskForm
 
-from wtforms.fields import SubmitField
-from wtforms.fields import StringField
-from wtforms.fields import IntegerField
-from wtforms.fields import FormField
-from wtforms.fields import FieldList
-from wtforms.fields import SelectField
+from wtforms.fields import (SubmitField,
+                            StringField,
+                            IntegerField,
+                            FormField,
+                            FieldList,
+                            SelectField)
+from wtforms.validators import (InputRequired,
+                                DataRequired,
+                                Optional)
 
-from wtforms.validators import InputRequired
-from wtforms.validators import DataRequired
-from wtforms.validators import Optional
+from wazo_admin_ui.helpers.destination import DestinationHiddenField
 
 
 class IVRDestinationForm(FlaskForm):
     type = SelectField('Destination', choices=[], validators=[DataRequired()])
     result = SelectField('Result', choices=[], validators=[DataRequired()])
 
+
 class IVRChoicesForm(FlaskForm):
     exten = StringField('Extension', validators=[DataRequired()])
     destination = FieldList(FormField(IVRDestinationForm), min_entries=1)
+
 
 class IvrForm(FlaskForm):
     name = StringField('Name', [InputRequired()])
@@ -38,4 +41,11 @@ class IvrForm(FlaskForm):
     timeout = IntegerField('Timeout', validators=[Optional()])
     timeout_destination = FieldList(FormField(IVRDestinationForm), min_entries=1)
     submit = SubmitField('Submit')
+
+
+class IvrDestinationForm(FlaskForm):
+    setted_value_template = '{ivr_name}'
+
+    ivr_id = SelectField('IVR', choices=[])
+    ivr_name = DestinationHiddenField()
 

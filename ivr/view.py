@@ -7,7 +7,7 @@ from __future__ import unicode_literals
 from flask_menu.classy import classy_menu_item
 from marshmallow import fields
 
-from wazo_admin_ui.helpers.classful import BaseView
+from wazo_admin_ui.helpers.classful import BaseView, BaseDestinationView
 from wazo_admin_ui.helpers.mallow import BaseSchema, BaseAggregatorSchema, extract_form_fields
 
 from .form import IvrForm
@@ -34,3 +34,11 @@ class IvrView(BaseView):
     @classy_menu_item('.ivr', 'Ivr', order=4, icon="navicon")
     def index(self):
         return super(IvrView, self).index()
+
+class IvrDestinationView(BaseDestinationView):
+
+    def list_json(self):
+        params = self._extract_params()
+        ivrs = self.service.list(**params)
+        results = [{'id': ivr['id'], 'text': ivr['name']} for ivr in ivrs['items']]
+        return self._select2_response(results, ivr['total'], params)
