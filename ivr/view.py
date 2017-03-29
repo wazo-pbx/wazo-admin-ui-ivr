@@ -4,6 +4,8 @@
 
 from __future__ import unicode_literals
 
+from flask import render_template
+
 from flask_menu.classy import classy_menu_item
 from marshmallow import fields
 
@@ -34,6 +36,10 @@ class IvrView(BaseView):
     @classy_menu_item('.ivr', 'Ivr', order=4, icon="navicon")
     def index(self):
         return super(IvrView, self).index()
+
+    def add(self):
+        return render_template('ivr/add.html',
+                               form=self.form())
 
 class IvrDestinationView(BaseDestinationView):
 

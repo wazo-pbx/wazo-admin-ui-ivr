@@ -6,7 +6,7 @@
 
 {% block content %}
   <section class="content">
-    {% call build_list_containers('Ivr', 'navicon') %}
+    {% call build_list_containers('Ivr', 'navicon', url_for('.IvrView:add')) %}
       {% call build_list_table() %}
         {% call build_list_table_headers() %}
           <th>Name</th>
@@ -38,13 +38,4 @@
         {% endcall %}
       {% endcall %}
     {% endcall %}
-
-    {% call build_hidden_add_containers('Add Ivr') %}
-      {% call build_form() %}
-        {% call add_default_fields(form=form, submit_value="Add") %}
-          {{ render_field(form.name) }}
-        {% endcall %}
-      {% endcall %}
-    {% endcall %}
-  </section>
 {% endblock %}
