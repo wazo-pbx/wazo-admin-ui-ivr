@@ -4,18 +4,22 @@
 
 from __future__ import unicode_literals
 
-from flask import render_template
-
 from flask_menu.classy import classy_menu_item
 from marshmallow import fields
 
-from wazo_admin_ui.helpers.classful import BaseView, BaseDestinationView
+from wazo_admin_ui.helpers.classful import BaseViewWithAdd, BaseDestinationView
 from wazo_admin_ui.helpers.mallow import BaseSchema, BaseAggregatorSchema, extract_form_fields
+from wazo_admin_ui.helpers.destination import DestinationSchema
+
 
 from .form import IvrForm
 
 
 class IvrSchema(BaseSchema):
+
+    timeout_destination = fields.Nested(DestinationSchema)
+    abort_destination = fields.Nested(DestinationSchema)
+    invalid_destination = fields.Nested(DestinationSchema)
 
     class Meta:
         fields = extract_form_fields(IvrForm)
@@ -27,7 +31,7 @@ class AggregatorSchema(BaseAggregatorSchema):
     ivr = fields.Nested(IvrSchema)
 
 
-class IvrView(BaseView):
+class IvrView(BaseViewWithAdd):
 
     form = IvrForm
     resource = 'ivr'
@@ -36,10 +40,6 @@ class IvrView(BaseView):
     @classy_menu_item('.ivr', 'Ivr', order=4, icon="navicon")
     def index(self):
         return super(IvrView, self).index()
-
-    def add(self):
-        return render_template('ivr/add.html',
-                               form=self.form())
 
 class IvrDestinationView(BaseDestinationView):
 

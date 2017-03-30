@@ -14,32 +14,22 @@ from wtforms.validators import (InputRequired,
                                 DataRequired,
                                 Optional)
 
-from wazo_admin_ui.helpers.destination import DestinationHiddenField
-
-
-class IVRDestinationForm(FlaskForm):
-    type = SelectField('Destination', choices=[], validators=[DataRequired()])
-    result = SelectField('Result', choices=[], validators=[DataRequired()])
-
-
-class IVRChoicesForm(FlaskForm):
-    exten = StringField('Extension', validators=[DataRequired()])
-    destination = FieldList(FormField(IVRDestinationForm), min_entries=1)
+from wazo_admin_ui.helpers.destination import DestinationHiddenField, DestinationField
 
 
 class IvrForm(FlaskForm):
     name = StringField('Name', [InputRequired()])
-    abort_destination = FieldList(FormField(IVRDestinationForm), min_entries=1)
+    abort_destination = DestinationField('Abort destination')
     abort_sound = StringField('Abort sound')
-    choices = FieldList(FormField(IVRChoicesForm), min_entries=1)
+    choices = StringField('Choices')
     description = StringField('Description')
     greeting_sound = StringField('Greeting sound')
-    invalid_destination = FieldList(FormField(IVRDestinationForm), min_entries=1)
+    invalid_destination = DestinationField('Invalid destination')
     invalid_sound = StringField('Invalid sound')
     max_tries = IntegerField('Max tries', validators=[Optional()])
     menu_sound = StringField('Menu sound', validators=[DataRequired()])
     timeout = IntegerField('Timeout', validators=[Optional()])
-    timeout_destination = FieldList(FormField(IVRDestinationForm), min_entries=1)
+    timeout_destination = DestinationField('Timeout destination')
     submit = SubmitField('Submit')
 
 
