@@ -24,17 +24,17 @@ class IvrChoiceForm(FlaskForm):
 
 class IvrForm(FlaskForm):
     name = StringField('Name', [InputRequired()])
-    abort_destination = DestinationField('Abort destination')
+    abort_destination = DestinationField(destination_label='Abort destination')
     abort_sound = StringField('Abort sound')
     choices = FieldList(FormField(IvrChoiceForm))
     description = StringField('Description')
     greeting_sound = StringField('Greeting sound')
-    invalid_destination = DestinationField('Invalid destination')
+    invalid_destination = DestinationField(destination_label='Invalid destination')
     invalid_sound = StringField('Invalid sound')
     max_tries = IntegerField('Max tries', validators=[Optional()])
     menu_sound = StringField('Menu sound', validators=[DataRequired()])
     timeout = IntegerField('Timeout', validators=[Optional()])
-    timeout_destination = DestinationField('Timeout destination')
+    timeout_destination = DestinationField(destination_label='Timeout destination')
     submit = SubmitField('Submit')
 
 
@@ -43,4 +43,3 @@ class IvrDestinationForm(FlaskForm):
 
     ivr_id = SelectField('IVR', choices=[])
     ivr_name = DestinationHiddenField()
-
