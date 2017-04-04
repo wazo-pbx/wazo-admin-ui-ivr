@@ -17,11 +17,16 @@ from wtforms.validators import (InputRequired,
 from wazo_admin_ui.helpers.destination import DestinationHiddenField, DestinationField
 
 
+class IvrChoiceForm(FlaskForm):
+    digit = StringField()
+    destination = DestinationField()
+
+
 class IvrForm(FlaskForm):
     name = StringField('Name', [InputRequired()])
     abort_destination = DestinationField('Abort destination')
     abort_sound = StringField('Abort sound')
-    choices = StringField('Choices')
+    choices = FieldList(FormField(IvrChoiceForm))
     description = StringField('Description')
     greeting_sound = StringField('Greeting sound')
     invalid_destination = DestinationField('Invalid destination')
