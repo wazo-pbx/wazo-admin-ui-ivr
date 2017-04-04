@@ -23,7 +23,7 @@
     {% endcall %}
   {% endcall %}
 
-  {% call build_form_containers('Add IVR', 'navicon') %}
+  {% call build_form_containers('Add choices') %}
     {% call build_form(action=url_for('.IvrView:post')) %}
       {{ build_add_row_entry_header() }}
       {% call add_default_fields(form=form, submit_value="Add") %}
