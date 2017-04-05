@@ -7,10 +7,9 @@ from __future__ import unicode_literals
 from flask_menu.classy import classy_menu_item
 from marshmallow import fields
 
-from wazo_admin_ui.helpers.classful import BaseViewWithAdd, BaseDestinationView
+from wazo_admin_ui.helpers.classful import BaseView, NewViewMixin, BaseDestinationView
 from wazo_admin_ui.helpers.mallow import BaseSchema, BaseAggregatorSchema, extract_form_fields
 from wazo_admin_ui.helpers.destination import DestinationSchema
-
 
 from .form import IvrForm
 
@@ -31,7 +30,7 @@ class AggregatorSchema(BaseAggregatorSchema):
     ivr = fields.Nested(IvrSchema)
 
 
-class IvrView(BaseViewWithAdd):
+class IvrView(NewViewMixin, BaseView):
 
     form = IvrForm
     resource = 'ivr'
@@ -40,6 +39,7 @@ class IvrView(BaseViewWithAdd):
     @classy_menu_item('.ivr', 'Ivr', order=4, icon="navicon")
     def index(self):
         return super(IvrView, self).index()
+
 
 class IvrDestinationView(BaseDestinationView):
 

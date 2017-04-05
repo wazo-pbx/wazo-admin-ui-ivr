@@ -6,7 +6,7 @@
 
 {% block content %}
   <section class="content">
-    {% call build_list_containers('Ivr', 'navicon', url_for('.IvrView:add')) %}
+    {% call build_list_containers('Ivr', 'navicon', url_for('.IvrView:new')) %}
       {% call build_list_table() %}
         {% call build_list_table_headers() %}
           <th>Name</th>
