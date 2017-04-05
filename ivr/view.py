@@ -47,4 +47,4 @@ class IvrDestinationView(BaseDestinationView):
         params = self._extract_params()
         ivrs = self.service.list(**params)
         results = [{'id': ivr['id'], 'text': ivr['name']} for ivr in ivrs['items']]
-        return self._select2_response(results, ivr['total'], params)
+        return self._select2_response(results, ivrs['total'], params)
