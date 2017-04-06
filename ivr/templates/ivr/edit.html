@@ -40,7 +40,7 @@
             {{ _build_line_entry(form.choices.pop_entry(), template=True) }}
 
             {% for choice in form.choices %}
-               {{ _build_line_entry(choice) }}
+               {{ _build_choice_entry(choice) }}
             {% endfor %}
           {% endcall %}
 
@@ -50,7 +50,7 @@
   {% endcall %}
 {% endblock %}
 
-{% macro _build_line_entry(choice, template=False) %}
+{% macro _build_choice_entry(choice, template=False) %}
   {% if template %}
     {% set tr_class = "row-template hidden" %}
   {% endif %}
