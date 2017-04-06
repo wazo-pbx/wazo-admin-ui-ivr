@@ -31,9 +31,9 @@ class IvrForm(FlaskForm):
     greeting_sound = StringField('Greeting sound')
     invalid_destination = DestinationField(destination_label='Invalid destination')
     invalid_sound = StringField('Invalid sound')
-    max_tries = IntegerField('Max tries', validators=[Optional()])
+    max_tries = IntegerField('Max tries', default=3, validators=[Optional()])
     menu_sound = StringField('Menu sound', validators=[DataRequired()])
-    timeout = IntegerField('Timeout', validators=[Optional()])
+    timeout = IntegerField('Timeout', default=0, validators=[Optional()])
     timeout_destination = DestinationField(destination_label='Timeout destination')
     submit = SubmitField('Submit')
 
