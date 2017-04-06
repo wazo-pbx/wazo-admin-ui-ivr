@@ -11,7 +11,15 @@ from wazo_admin_ui.helpers.classful import BaseView, NewViewMixin, BaseDestinati
 from wazo_admin_ui.helpers.mallow import BaseSchema, BaseAggregatorSchema, extract_form_fields
 from wazo_admin_ui.helpers.destination import DestinationSchema
 
-from .form import IvrForm
+from .form import IvrForm, IvrChoiceForm
+
+
+class IvrChoices(BaseSchema):
+
+    destination = fields.Nested(DestinationSchema)
+
+    class Meta:
+        fields = extract_form_fields(IvrChoiceForm)
 
 
 class IvrSchema(BaseSchema):
@@ -19,6 +27,7 @@ class IvrSchema(BaseSchema):
     timeout_destination = fields.Nested(DestinationSchema)
     abort_destination = fields.Nested(DestinationSchema)
     invalid_destination = fields.Nested(DestinationSchema)
+    choices = fields.List(fields.Nested(IvrChoices))
 
     class Meta:
         fields = extract_form_fields(IvrForm)
