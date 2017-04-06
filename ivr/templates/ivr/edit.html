@@ -37,7 +37,7 @@
 
           {% call build_table_body(class_='dynamic-table') %}
             {% do form.choices.append_entry() %}
-            {{ _build_line_entry(form.choices.pop_entry(), template=True) }}
+            {{ _build_choice_entry(form.choices.pop_entry(), template=True) }}
 
             {% for choice in form.choices %}
                {{ _build_choice_entry(choice) }}
