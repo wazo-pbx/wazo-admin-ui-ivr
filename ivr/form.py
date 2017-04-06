@@ -19,7 +19,7 @@ from wazo_admin_ui.helpers.destination import DestinationHiddenField, Destinatio
 
 class IvrChoiceForm(FlaskForm):
     digit = StringField()
-    destination = DestinationField()
+    destination = DestinationField(destination_label='')
 
 
 class IvrForm(FlaskForm):
