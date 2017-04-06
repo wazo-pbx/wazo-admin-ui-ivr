@@ -4,10 +4,12 @@
 
 from __future__ import unicode_literals
 
+from flask import jsonify, request
 from flask_menu.classy import classy_menu_item
 from marshmallow import fields
 
-from wazo_admin_ui.helpers.classful import BaseView, NewViewMixin, BaseDestinationView
+from wazo_admin_ui.helpers.classful import BaseView, NewViewMixin, LoginRequiredView
+from wazo_admin_ui.helpers.classful import extract_select2_params, build_select2_response
 from wazo_admin_ui.helpers.mallow import BaseSchema, BaseAggregatorSchema, extract_form_fields
 from wazo_admin_ui.helpers.destination import DestinationSchema
 
@@ -50,10 +52,10 @@ class IvrView(NewViewMixin, BaseView):
         return super(IvrView, self).index()
 
 
-class IvrDestinationView(BaseDestinationView):
+class IvrDestinationView(LoginRequiredView):
 
     def list_json(self):
-        params = self._extract_params()
+        params = extract_select2_params(request.args)
         ivrs = self.service.list(**params)
         results = [{'id': ivr['id'], 'text': ivr['name']} for ivr in ivrs['items']]
-        return self._select2_response(results, ivrs['total'], params)
+        return jsonify(build_select2_response(results, ivrs['total'], params))
