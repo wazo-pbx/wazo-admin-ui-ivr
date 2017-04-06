@@ -5,46 +5,49 @@
 {% endblock %}
 
 {% block content %}
-  {% call build_form(action=url_for('.IvrView:post')) %}
-    {% call build_form_containers('Add IVR', 'navicon') %}
-      {% call add_default_fields(form=form, submit_value="Add") %}
-        {{ render_field(form.name) }}
-        {{ render_field(form.description) }}
-        {{ render_field(form.menu_sound) }}
-        {{ render_field(form.greeting_sound) }}
-        {{ render_field(form.max_tries) }}
-        {{ render_field(form.invalid_destination, with_label=False) }}
-        {{ render_field(form.invalid_sound) }}
-        {{ render_field(form.timeout) }}
-        {{ render_field(form.timeout_destination, with_label=False) }}
-        {{ render_field(form.abort_destination, with_label=False) }}
-        {{ render_field(form.abort_sound) }}
+
+  {% call build_section_row() %}
+    {% call build_form(action=url_for('.IvrView:post')) %}
+      {% call build_form_box('Add IVR', '', 'navicon') %}
+        {% call add_default_fields(form=form, submit_value="Add") %}
+          {{ render_field(form.name) }}
+          {{ render_field(form.description) }}
+          {{ render_field(form.menu_sound) }}
+          {{ render_field(form.greeting_sound) }}
+          {{ render_field(form.max_tries) }}
+          {{ render_field(form.invalid_destination, with_label=False) }}
+          {{ render_field(form.invalid_sound) }}
+          {{ render_field(form.timeout) }}
+          {{ render_field(form.timeout_destination, with_label=False) }}
+          {{ render_field(form.abort_destination, with_label=False) }}
+          {{ render_field(form.abort_sound) }}
+        {% endcall %}
       {% endcall %}
-    {% endcall %}
 
-    {% call build_form_containers('Add choices') %}
-      {% call build_form(action=url_for('.IvrView:post')) %}
-        {{ build_add_row_entry_header() }}
+      {% call build_form_box('Add choices', box_class='box-info') %}
+        {% call build_form(action=url_for('.IvrView:post')) %}
+          {{ build_add_row_entry_header() }}
 
-        {% call build_table() %}
+          {% call build_table() %}
 
-          {% call build_table_headers() %}
-            <th>Digit</th>
-            <th>Destination</th>
-            <th>Actions</th>
-          {% endcall %}
+            {% call build_table_headers() %}
+              <th>Digit</th>
+              <th>Destination</th>
+              <th>Actions</th>
+            {% endcall %}
 
-          {% call build_table_body(class_='dynamic-table') %}
-            {% do form.choices.append_entry() %}
-            {{ _build_line_entry(form.choices.pop_entry(), template=True) }}
+            {% call build_table_body(class_='dynamic-table') %}
+              {% do form.choices.append_entry() %}
+              {{ _build_line_entry(form.choices.pop_entry(), template=True) }}
 
-            {% for choice in form.choices %}
-               {{ _build_line_entry(choice) }}
-            {% endfor %}
+              {% for choice in form.choices %}
+                 {{ _build_line_entry(choice) }}
+              {% endfor %}
+            {% endcall %}
+
           {% endcall %}
 
         {% endcall %}
-
       {% endcall %}
     {% endcall %}
   {% endcall %}
