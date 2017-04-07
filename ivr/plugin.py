@@ -18,13 +18,12 @@ class Plugin(object):
 
     def load(self, dependencies):
         core = dependencies['flask']
-        config = dependencies['config']
 
-        IvrView.service = IvrService(config['confd'])
+        IvrView.service = IvrService()
         IvrView.register(ivr, route_base='/ivrs')
         register_flaskview(ivr, IvrView)
 
-        IvrDestinationView.service = IvrService(config['confd'])
+        IvrDestinationView.service = IvrService()
         IvrDestinationView.register(ivr, route_base='/ivr_destination')
 
         register_destination_form('ivr', 'Ivr', IvrDestinationForm)
