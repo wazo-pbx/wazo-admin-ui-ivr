@@ -39,7 +39,7 @@ class IvrForm(FlaskForm):
 
 
 class IvrDestinationForm(FlaskForm):
-    setted_value_template = '{ivr_name}'
+    setted_value_template = u'{ivr_name}'
 
     ivr_id = SelectField('IVR', choices=[])
     ivr_name = DestinationHiddenField()
