@@ -2,8 +2,6 @@
 # Copyright 2017 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from flask_wtf import FlaskForm
-
 from wtforms.fields import (SubmitField,
                             StringField,
                             IntegerField,
@@ -15,14 +13,15 @@ from wtforms.validators import (InputRequired,
                                 Optional)
 
 from wazo_admin_ui.helpers.destination import DestinationHiddenField, DestinationField
+from wazo_admin_ui.helpers.form import BaseForm
 
 
-class IvrChoiceForm(FlaskForm):
+class IvrChoiceForm(BaseForm):
     exten = StringField()
     destination = DestinationField(destination_label='')
 
 
-class IvrForm(FlaskForm):
+class IvrForm(BaseForm):
     name = StringField('Name', [InputRequired()])
     abort_destination = DestinationField(destination_label='Abort destination')
     abort_sound = StringField('Abort sound')
@@ -38,7 +37,7 @@ class IvrForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
-class IvrDestinationForm(FlaskForm):
+class IvrDestinationForm(BaseForm):
     setted_value_template = u'{ivr_name}'
 
     ivr_id = SelectField('IVR', choices=[])
