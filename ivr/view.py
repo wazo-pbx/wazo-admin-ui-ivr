@@ -22,16 +22,6 @@ class IvrView(NewViewMixin, BaseView):
     def index(self):
         return super(IvrView, self).index()
 
-    def _map_resources_to_form(self, resources):
-        return self.form(data=resources['ivr'])
-
-    def _map_form_to_resources(self, form, form_id=None):
-        ivr = form.to_dict()
-        resources = {'ivr': ivr}
-        if form_id:
-            resources['ivr']['id'] = form_id
-        return resources
-
     def _map_resources_to_form_errors(self, form, resources):
         form.populate_errors(resources.get('ivr', {}))
         return form

@@ -7,8 +7,8 @@
 {% block content %}
 
   {% call build_section_row() %}
-    {% call build_form(action=url_for('.IvrView:put', id=resources.ivr.id)) %}
-      {% call build_form_box('Ivr', resources.ivr.name, 'navicon') %}
+    {% call build_form(action=url_for('.IvrView:put', id=resource.id)) %}
+      {% call build_form_box('Ivr', resource.name, 'navicon') %}
         {% call add_default_fields(form=form, submit_value="Update") %}
           {{ render_field(form.name) }}
           {{ render_field(form.description) }}

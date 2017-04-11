@@ -7,5 +7,4 @@ from wazo_admin_ui.helpers.service import BaseConfdService
 
 class IvrService(BaseConfdService):
 
-    resource_name = 'ivr'
     resource_confd = 'ivr'
