@@ -1,2 +1,2 @@
-recursive-include ivr/templates *
-recursive-include ivr/static *
+recursive-include wazo_plugind_admin_ui_ivr_official/templates *
+recursive-include wazo_plugind_admin_ui_ivr_official/static *

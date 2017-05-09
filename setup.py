@@ -23,7 +23,7 @@ setup(
 
     entry_points={
         'wazo_admin_ui.plugins': [
-            'ivr = ivr.plugin:Plugin',
+            'ivr = wazo_plugind_admin_ui_ivr_official.plugin:Plugin',
         ]
     }
 )
