@@ -36,6 +36,14 @@ class IvrForm(BaseForm):
     timeout_destination = DestinationField(destination_label='Timeout destination')
     submit = SubmitField('Submit')
 
+    def to_dict(self):
+        data = super(IvrForm, self).to_dict()
+
+        for field in ['abort_destination', 'invalid_destination', 'timeout_destination']:
+            if data.get(field, {}).get('type') == 'none':
+                data[field] = None
+        return data
+
 
 class IvrDestinationForm(BaseForm):
     setted_value_template = u'{ivr_name}'
