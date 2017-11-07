@@ -45,7 +45,7 @@ class IvrForm(BaseForm):
 
 
 class IvrDestinationForm(BaseForm):
-    setted_value_template = '{ivr_name}'
+    set_value_template = '{ivr_name}'
 
     ivr_id = SelectField('IVR', [InputRequired()], choices=[])
     ivr_name = DestinationHiddenField()
