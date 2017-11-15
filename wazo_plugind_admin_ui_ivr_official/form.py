@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
@@ -46,7 +45,7 @@ class IvrForm(BaseForm):
 
 
 class IvrDestinationForm(BaseForm):
-    setted_value_template = u'{ivr_name}'
+    set_value_template = '{ivr_name}'
 
     ivr_id = SelectField('IVR', [InputRequired()], choices=[])
     ivr_name = DestinationHiddenField()
