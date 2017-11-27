@@ -8,7 +8,7 @@
 
   {% call build_section_row() %}
     {% call build_form(action=url_for('.IvrView:post')) %}
-      {% call build_form_box('Add IVR', '', 'navicon') %}
+      {% call build_form_box('Add IVR', '', 'navicon', container_class='col-md-6') %}
         {% call add_default_fields(form=form, submit_value="Add") %}
           {{ render_field(form.name) }}
           {{ render_field(form.description) }}
@@ -24,7 +24,7 @@
         {% endcall %}
       {% endcall %}
 
-      {% call build_form_box('Add choices', box_class='box-info') %}
+      {% call build_form_box('Add choices', box_class='box-info', container_class='col-md-6') %}
         {{ build_add_row_entry_header() }}
 
         {% call build_table() %}
