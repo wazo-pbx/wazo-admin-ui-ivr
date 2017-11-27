@@ -8,11 +8,10 @@
   <section class="content">
     {% call build_list_containers('Ivr', 'navicon') %}
       {% call build_list_table() %}
-        {% call build_list_table_headers() %}
+        {% call build_list_table_headers(get=url_for('.IvrView:get', id=''), delete=url_for('.IvrView:delete', id=''), add=url_for('.IvrView:new')) %}
           <th>Name</th>
           <th>Extensions</th>
           <th>Menu sound</th>
-          {{ add_list_table_header_action(get=url_for('.IvrView:get', id=''), delete=url_for('.IvrView:delete', id=''), add=url_for('.IvrView:new')) }}
         {% endcall %}
         {% call(ivr) build_list_table_rows(resource_list['items']) %}
           <td>{{ ivr.name }}</td>
@@ -31,10 +30,6 @@
             {% endif %}
           </td>
           <td>{{ ivr.menu_sound }}</td>
-          <td>
-            {{ add_edit_button(href=url_for('.IvrView:get', id=ivr.id)) }}
-            {{ add_delete_button(href=url_for('.IvrView:delete', id=ivr.id)) }}
-          </td>
         {% endcall %}
       {% endcall %}
     {% endcall %}
