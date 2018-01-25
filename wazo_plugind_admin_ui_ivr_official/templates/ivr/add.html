@@ -1,15 +1,15 @@
 {% extends "layout.html" %}
 
 {% block content_header %}
-  {{ build_breadcrumb('IVR', '', 'navicon', ['List']) }}
+  {{ build_breadcrumb(_('IVR'), '', 'navicon', [_('List')]) }}
 {% endblock %}
 
 {% block content %}
 
   {% call build_section_row() %}
     {% call build_form(action=url_for('.IvrView:post')) %}
-      {% call build_form_box('Add IVR', '', 'navicon', container_class='col-md-6') %}
-        {% call add_default_fields(form=form, submit_value="Add") %}
+      {% call build_form_box(_('Add IVR'), '', 'navicon', container_class='col-md-6') %}
+        {% call add_default_fields(form=form, submit_value=_('Add')) %}
           {{ render_field(form.name) }}
           {{ render_field(form.description) }}
           {{ render_field(form.menu_sound) }}
@@ -24,7 +24,7 @@
         {% endcall %}
       {% endcall %}
 
-      {% call build_form_box('Add choices', box_class='box-info', container_class='col-md-6') %}
+      {% call build_form_box(_('Add choices'), box_class='box-info', container_class='col-md-6') %}
         {{ build_add_row_entry_header() }}
 
         {% call build_table() %}

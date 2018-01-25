@@ -1,6 +1,7 @@
-# Copyright 2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2017-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
+from flask_babel import lazy_gettext as l_
 from wtforms.fields import (SubmitField,
                             StringField,
                             FormField,
@@ -21,19 +22,28 @@ class IvrChoiceForm(BaseForm):
 
 
 class IvrForm(BaseForm):
-    name = StringField('Name', [InputRequired(), Length(max=128)])
-    abort_destination = DestinationField(destination_label='Abort destination')
-    abort_sound = StringField('Abort sound', [Length(max=255)])
+    name = StringField(l_('Name'), validators=[InputRequired(), Length(max=128)])
+    abort_destination = DestinationField(destination_label=l_('Abort destination'),
+                                         description=l_('The destination to redirect the caller to when the maximum number of tries is reached. If not set, the call will be hanged up after playing the abort sound (if set)'))
+    abort_sound = SelectField(l_('Abort sound'), choices=[], validators=[Length(max=255)],
+                     description=l_('The sound played when the caller reach the maximum number of tries. Not used if an abort destination is set'))
     choices = FieldList(FormField(IvrChoiceForm))
-    description = StringField('Description')
-    greeting_sound = StringField('Greeting sound', [Length(max=255)])
-    invalid_destination = DestinationField(destination_label='Invalid destination')
-    invalid_sound = StringField('Invalid sound', [Length(max=255)])
-    max_tries = IntegerField('Max tries', default=3, validators=[NumberRange(min=1)])
-    menu_sound = StringField('Menu sound', validators=[InputRequired(), Length(max=255)])
-    timeout = IntegerField('Timeout', default=0, validators=[NumberRange(min=0)])
-    timeout_destination = DestinationField(destination_label='Timeout destination')
-    submit = SubmitField('Submit')
+    description = StringField(l_('Description'))
+    greeting_sound = SelectField(l_('Greeting sound'), choices=[], validators=[Length(max=255)],
+                     description=l_('The sound played to greet the caller'))
+    invalid_destination = DestinationField(destination_label=l_('Invalid destination'),
+                                 description=l_('The destination to redirect the caller to when he choose an invalid option. If not set, the menu will be replayed'))
+    invalid_sound = SelectField(l_('Invalid Sound'), choices=[], validators=[Length(max=255)],
+                     description=l_('The sound played when the caller choose an invalid option. Not used if an invalid destination is set'))
+    max_tries = IntegerField(l_('Max tries'), default=3, validators=[NumberRange(min=1)],
+                             description=l_('The maximum number of tries before aborting the call. Both a timeout and an invalid choice counts toward the number of tries integer Default:3'))
+    menu_sound = SelectField(l_('Menu Sound'), choices=[], validators=[Length(max=255)],
+                     description=l_('The sound played to prompt the caller for input'))
+    timeout = IntegerField(l_('Timeout'), default=5, validators=[NumberRange(min=0)],
+                           description=l_('Number of seconds to wait after the menu sound is played before either replaying the menu, redirecting the call to the timeout destination (if set) or aborting the call (if the maximum number of tries has been reached) integer Default:5'))
+    timeout_destination = DestinationField(destination_label=l_('Timeout destination'),
+                                           description=l_('The destination to redirect the caller to on timeout. If not set, the menu will be replayed'))
+    submit = SubmitField(l_('Submit'))
 
     def to_dict(self):
         data = super(IvrForm, self).to_dict()
@@ -47,5 +57,5 @@ class IvrForm(BaseForm):
 class IvrDestinationForm(BaseForm):
     set_value_template = '{ivr_name}'
 
-    ivr_id = SelectField('IVR', [InputRequired()], choices=[])
+    ivr_id = SelectField(l_('IVR'), validators=[InputRequired()], choices=[])
     ivr_name = DestinationHiddenField()
