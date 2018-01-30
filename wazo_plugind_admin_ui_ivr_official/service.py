@@ -16,15 +16,14 @@ class IvrService(BaseConfdService):
         return confd.sounds.get(sound_name)
 
     def find_sound_by_path(self, sound_path):
-        for sound in self.list_sound()['items']:
-            if sound['name'] == 'system':
-                for file in sound['files']:
-                    for format in file['formats']:
-                        if file['name'] == sound_path:
-                            return file, format
-            else:
-                for file in sound['files']:
-                    for format in file['formats']:
-                        if format['path'] == sound_path:
-                            return file, format
+        sounds = self.list_sound()['items']
+        for sound in sounds:
+            for file_ in sound['files']:
+                for format_ in file_['formats']:
+                    if sound['name'] == 'system':
+                        if file_['name'] == sound_path:
+                            return file_, format_
+                    else:
+                        if format_['path'] == sound_path:
+                            return file_, format_
         return None, None
