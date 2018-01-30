@@ -26,12 +26,13 @@ class IvrView(NewViewMixin, BaseView):
 
     def _build_ivr_choices_sound(self, resource):
         for choice in resource['choices']:
-            if choice['destination']['type'] == 'sound':
-                file_, format_ = self.service.find_sound_by_path(choice['destination']['filename'])
-                if file_:
-                    choice['destination']['name'] = file_['name']
-                    choice['destination']['format'] = self._prepare_sound_format(format_['format'])
-                    choice['destination']['language'] = self._prepare_sound_language(format_['language'])
+            if choice['destination']['type'] != 'sound':
+                continue
+            file_, format_ = self.service.find_sound_by_path(choice['destination']['filename'])
+            if file_:
+                choice['destination']['name'] = file_['name']
+                choice['destination']['format'] = format_['format']
+                choice['destination']['language'] = format_['language']
 
     def _populate_form(self, form):
         sounds = self.service.list_sound()
@@ -42,29 +43,20 @@ class IvrView(NewViewMixin, BaseView):
         return form
 
     def _build_set_choices_sound(self, sounds):
-        yield (None, l_('None'))
+        result = [(None, l_('None'))]
         for sound in sounds['items']:
             for file_ in sound['files']:
                 for format_ in file_['formats']:
-                    if sound['name'] == 'system':
-                        yield (file_['name'], self._prepare_sound_filename_infos(file_, format_))
-                    else:
-                        yield (format_['path'], self._prepare_sound_filename_infos(file_, format_))
+                    name = file_['path'] if sound['name'] != 'system' else file_['name']
+                    label = self._prepare_sound_filename_label(file_, format_)
+                    result.append(name, label)
 
-    def _prepare_sound_filename_infos(self, file_, format_):
-        return '{}.{} ({})'.format(file_['name'],
-                                   self._prepare_sound_format(format_['format']),
-                                   self._prepare_sound_language(format_['language']))
-
-    def _prepare_sound_language(self, language):
-        if not language:
-            return l_('Unknown language')
-        return language
-
-    def _prepare_sound_format(self, format_):
-        if not format_:
-            return l_('Unknown format')
-        return format_
+    def _prepare_sound_filename_label(self, file_, format_):
+        return '{}{}{}'.format(
+            file_['name'],
+            '.{}'.format(format_['format']) if format_['format'] else '',
+            ' ({})'.format(format_['language']) if format_['language'] else '',
+        )
 
     def _map_resources_to_form_errors(self, form, resources):
         form.populate_errors(resources.get('ivr', {}))
