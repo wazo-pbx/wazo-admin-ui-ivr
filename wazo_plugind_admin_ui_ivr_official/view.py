@@ -43,18 +43,19 @@ class IvrView(NewViewMixin, BaseView):
         return form
 
     def _build_set_choices_sound(self, sounds):
-        result = [(None, l_('None'))]
+        results = [(None, l_('None'))]
         for sound in sounds['items']:
             for file_ in sound['files']:
                 for format_ in file_['formats']:
-                    name = file_['path'] if sound['name'] != 'system' else file_['name']
+                    name = format_['path'] if sound['name'] != 'system' else file_['name']
                     label = self._prepare_sound_filename_label(file_, format_)
-                    result.append(name, label)
+                    results.append((name, label))
+        return results
 
     def _prepare_sound_filename_label(self, file_, format_):
         return '{}{}{}'.format(
             file_['name'],
-            '.{}'.format(format_['format']) if format_['format'] else '',
+            ' [{}]'.format(format_['format']) if format_['format'] else '',
             ' ({})'.format(format_['language']) if format_['language'] else '',
         )
 
