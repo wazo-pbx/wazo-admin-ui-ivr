@@ -87,7 +87,7 @@ class IvrForm(BaseForm):
     submit = SubmitField(l_('Submit'))
 
     def to_dict(self):
-        data = super(IvrForm, self).to_dict()
+        data = super().to_dict()
 
         for field in ['abort_destination', 'invalid_destination', 'timeout_destination']:
             if data.get(field, {}).get('type') == 'none':
