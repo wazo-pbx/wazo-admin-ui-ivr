@@ -43,7 +43,7 @@ class IvrView(NewViewMixin, BaseView):
         return form
 
     def _build_set_choices_sound(self, sounds):
-        results = [(None, l_('None'))]
+        results = [('', l_('None'))]
         for sound in sounds['items']:
             for file_ in sound['files']:
                 for format_ in file_['formats']:
