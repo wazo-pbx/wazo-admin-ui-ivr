@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 
 {% block content_header %}
-  {{ build_breadcrumb('Ivr', '', 'navicon', ['List']) }}
+  {{ build_breadcrumb(_('IVR'), '', 'navicon', [_('List')]) }}
 {% endblock %}
 
 {% block content %}
   <section class="content">
-    {% call build_list_containers('Ivr', 'navicon') %}
+    {% call build_list_containers(_('IVR'), 'navicon') %}
       {% call build_list_table() %}
         {% call build_list_table_headers(get=url_for('.IvrView:get', id=''), delete=url_for('.IvrView:delete', id=''), add=url_for('.IvrView:new')) %}
           <th>Name</th>
