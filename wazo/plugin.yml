@@ -1,6 +1,6 @@
 name: admin-ui-ivr
 namespace: official
-version: 1.2.0-2
+version: 1.2.0-3
 author: Wazo Team
 display_name: IVR
 min_wazo_version: 18.02
