@@ -9,9 +9,9 @@
     {% call build_list_containers(_('IVR'), 'navicon') %}
       {% call build_list_table() %}
         {% call build_list_table_headers(get=url_for('.IvrView:get', id=''), delete=url_for('.IvrView:delete', id=''), add=url_for('.IvrView:new')) %}
-          <th>Name</th>
-          <th>Extensions</th>
-          <th>Menu sound</th>
+          <th>{{ _('Name') }}</th>
+          <th>{{ _('Extensions') }}</th>
+          <th>{{ _('Menu sound') }}</th>
         {% endcall %}
         {% call(ivr) build_list_table_rows(resource_list['items']) %}
           <td>{{ ivr.name }}</td>
@@ -19,7 +19,7 @@
             {% if not ivr.incalls %}
               -
             {% else %}
-              <strong>incall:</strong>
+              <strong>{{ _('incall') }}:</strong>
               <ul>
               {% for extensions in ivr.incalls %}
                 {% for e in extensions.extensions %}
