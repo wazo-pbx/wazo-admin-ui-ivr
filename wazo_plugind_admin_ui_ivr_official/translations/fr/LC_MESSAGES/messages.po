@@ -1,16 +1,16 @@
-# Translations template for wazo-admin-ui-ivr.
+# Translations template for wazo_admin_ui_ivr.
 # Copyright (C) 2018 The Wazo Authors  (see the AUTHORS file)
 # This file is distributed under the same license as the
-# wazo-admin-ui-ivr project.
+# wazo_admin_ui_ivr project.
 # Wazo Dev Team <dev@wazo.community>, 2018.
 # 
 # Translators:
 # Cedric Abunar <cabunar@wazo.io>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: wazo-admin-ui-ivr 0.1\n"
+"Project-Id-Version: wazo_admin_ui_ivr 0.1\n"
 "Report-Msgid-Bugs-To: 'dev@wazo.community'\n"
-"POT-Creation-Date: 2018-02-26 08:17-0500\n"
+"POT-Creation-Date: 2018-02-27 13:42-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cedric Abunar <cabunar@wazo.io>, 2018\n"
 "Language-Team: French (https://www.transifex.com/wazo/teams/69545/fr/)\n"
@@ -142,6 +142,9 @@ msgid "Submit"
 msgstr "Soumettre"
 
 #: wazo_plugind_admin_ui_ivr_official/form.py:101
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/add.html:4
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/edit.html:4
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/edit.html:11
 #: wazo_plugind_admin_ui_ivr_official/templates/ivr/list.html:4
 #: wazo_plugind_admin_ui_ivr_official/templates/ivr/list.html:9
 #: wazo_plugind_admin_ui_ivr_official/view.py:18
@@ -152,9 +155,45 @@ msgstr "IVR"
 msgid "None"
 msgstr "Aucun"
 
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/add.html:4
 #: wazo_plugind_admin_ui_ivr_official/templates/ivr/list.html:4
 msgid "List"
 msgstr "Liste"
+
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/add.html:11
+msgid "Add IVR"
+msgstr "Ajouter un IVR"
+
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/add.html:12
+msgid "Add"
+msgstr "Ajouter"
+
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/add.html:27
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/edit.html:27
+msgid "Add choices"
+msgstr "Ajouter un choix"
+
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/add.html:33
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/edit.html:33
+msgid "Digit"
+msgstr "Numéro"
+
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/add.html:34
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/edit.html:34
+msgid "Destination"
+msgstr "Destination"
+
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/add.html:35
+msgid "Actions"
+msgstr "Actions"
+
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/edit.html:4
+msgid "Edit"
+msgstr "Modifier"
+
+#: wazo_plugind_admin_ui_ivr_official/templates/ivr/edit.html:12
+msgid "Update"
+msgstr "Mettre à jour"
 
 #: wazo_plugind_admin_ui_ivr_official/templates/ivr/list.html:13
 msgid "Extensions"
